@@ -1,6 +1,12 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
+
+
+
+# * Create the REPL command parser in `adv.py` which allows the player to move to rooms
+#   in the four cardinal directions.
 
 room = {
     'outside':  Room("Outside Cave Entrance",

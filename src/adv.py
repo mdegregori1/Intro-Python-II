@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+import time 
 
 # Declare all the rooms
 
@@ -44,9 +45,65 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+print("Hello adventurer, what is your name?")
+time.sleep(1)
+
+player = Player(input("Enter Name -->"), room["outside"])
+
+print(f"Hi, {player.name}. Ready to get started?")
+
+response = input("\n -->")
+if response == 'y':
+    time.sleep(1)
+    pass
+else:
+    print("come back when you're ready to play!")
+    exit(0)
+
+# REPL
+# Read
+# Eval
+# Print
+# Loop
 
 # Write a loop that:
-#
+
+while True:
+    print(player.current_room.name)
+    print("")
+    print(player.current_room.description)
+    cmd = input("\n -->")
+    ## eval
+    if cmd == "q":
+        print("thank you for playing :) ")
+        exit(0)
+    elif cmd == "n":
+        if player.current_room.n_to is not None:
+            print("\nYou just moved north!\n")
+            player.current_room = player.current_room.n_to
+        else: 
+            print("You can't go that way")
+    elif cmd == "s":
+        if player.current_room.s_to is not None:
+            print("\nYou just moved south!\n")
+            player.current_room = player.current_room.s_to
+        else: 
+            print("You can't go that way")
+    elif cmd == "w":
+        if player.current_room.w_to is not None:
+            print("\nYou just moved west!\n")
+            player.current_room = player.current_room.w_to
+        else: 
+            print("You can't go that way")
+    elif cmd == "e":
+        if player.current_room.e_to is not None:
+            print("\nYou just moved east!\n")
+            player.current_room = player.current_room.e_to
+        else: 
+            print("You can't go that way")
+    else:
+        print("I didn't recognize that command. Try again")
+
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.

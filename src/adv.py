@@ -1,26 +1,36 @@
 from room import Room
 from player import Player
+from item import Item
 import time 
+
+# add items
+items = [
+    Item('Sword', 'A weapon used to abolish your enemies!'),
+    Item('Health Potion', 'Hurt? Fear not. Drink this, and heal.'),
+    Item('Armor', 'This bronze-cast armor will protect your health in battle.'),
+    Item('High Damage Fuel', 'Drinking fuel increases the damage that you can do.'),
+    Item('5 gold coins', 'Use gold coins to buy supplies!')
+]
 
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", items[0]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", items[1]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""", items[2]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", items[3]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""", items[4]),
 }
 
 
@@ -34,6 +44,8 @@ room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
+
+
 
 #
 # Main
@@ -76,7 +88,7 @@ else:
 # If the user enters "q", quit the game.
 
 while True:
-    print('you are currently in:', player.current_room.name)
+    print(f"you are currently in '{player.current_room.name}'. We can see {player.current_room.item}")
     print('')
     print('description:',player.current_room.description)
     command = input("Enter 'w' to move west, 'n' to move north, 'e' to move east, or 's' to move south. To quit, press 'q'. ")

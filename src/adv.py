@@ -2,6 +2,7 @@ from room import Room
 from player import Player
 from item import Item
 import time 
+import random 
 
 # add items
 items = [
@@ -13,24 +14,25 @@ items = [
 ]
 # package random import 
 # Declare all the rooms
+randomizer = random.choice(items)
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons", items[0]),
+                     "North of you, the cave mount beckons", randomizer),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east.""", items[1]),
+passages run north and east.""", randomizer),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm.""", items[2]),
+the distance, but there is no way across the chasm.""", randomizer),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air.""", items[3]),
+to north. The smell of gold permeates the air.""", randomizer),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""", items[4]),
+earlier adventurers. The only exit is to the south.""", randomizer),
 }
 
 
@@ -73,7 +75,6 @@ elif response == 'n':
 else:
     print("Sorry, I didn't recognize that command. Please try again.")
     exit()
-
 
 
 # Write a loop that:

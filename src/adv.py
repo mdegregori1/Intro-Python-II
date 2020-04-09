@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+import time 
 
 # Declare all the rooms
 
@@ -37,7 +39,30 @@ room['treasure'].s_to = room['narrow']
 # Main
 #
 
+print("Hello player, what is your name?")
+time.sleep(0.5)
+
 # Make a new player object that is currently in the 'outside' room.
+# should be input, though
+player = Player(input('Please enter your name:'), room['outside'])
+time.sleep(0.5)
+
+
+print(f'Thank you, {player.name}! Ready to get started?')
+time.sleep(0.5)
+
+response = input('y or n')
+
+if response == 'y':
+    pass
+elif response == 'n':
+    print("Please come back when you're ready to play!")
+    exit()
+else:
+    print("Sorry, I didn't recognize that command. Please try again.")
+    exit()
+
+
 
 # Write a loop that:
 #
@@ -49,3 +74,39 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+while True:
+    print('you are currently in:', player.current_room.name)
+    print('')
+    print('description:',player.current_room.description)
+    command = input("Enter 'w' to move west, 'n' to move north, 'e' to move east, or 's' to move south. To quit, press 'q'. ")
+
+    if command == 'w':
+        if player.current_room.w_to:
+            player.current_room = player.current_room.w_to
+            print("You moved west!")
+        else:
+            print('You cannot move west!')
+    elif command == 'n':
+        if player.current_room.n_to:
+            player.current_room = player.current_room.n_to
+            print("You moved north!")
+        else:
+            print('You cannot move north!')
+    elif command == 'e':
+        if player.current_room.e_to:
+            player.current_room = player.current_room.e_to
+            print("You moved east!")
+        else:
+            print('You cannot move east!')
+    elif command == 's':
+        if player.current_room.s_to:
+            player.current_room = player.current_room.s_to
+            print("You moved south!")
+        else:
+            print('You cannot move south!')
+    elif command == 'q':
+        print('See you next time!')
+        break
+    else:
+        print("Hm.. I didn't recognize that command. Please try again")

@@ -11,7 +11,7 @@ items = [
     Item('High Damage Fuel', 'Drinking fuel increases the damage that you can do.'),
     Item('5 gold coins', 'Use gold coins to buy supplies!')
 ]
-
+# package random import 
 # Declare all the rooms
 
 room = {
@@ -88,10 +88,14 @@ else:
 # If the user enters "q", quit the game.
 
 while True:
-    print(f"you are currently in '{player.current_room.name}'. We can see {player.current_room.item}")
+    player_name = player.current_room.name
+    player_item = player.current_room.item
+    room_description = player.current_room.description
+
+    print(f"you are currently in '{player_name}'. We can see {player_item}")
     print('')
-    print('description:',player.current_room.description)
-    command = input("Enter 'w' to move west, 'n' to move north, 'e' to move east, or 's' to move south. To quit, press 'q'. ")
+    print('description:',room_description)
+    command = input("Enter 'w' to move west, 'n' to move north, 'e' to move east, or 's' to move south. To pick up an item, type 'take'. To drop it, type 'drop'. To quit, press 'q'. ")
 
     if command == 'w':
         if player.current_room.w_to:
@@ -117,6 +121,13 @@ while True:
             print("You moved south!")
         else:
             print('You cannot move south!')
+    elif command == 'take':
+        player.items.append(player.current_room.item.name)
+        player_item = None 
+        print('current items list:', player.items )
+    elif command == 'drop':
+        player.items.pop()
+        print('current items list:', player.items)
     elif command == 'q':
         print('See you next time!')
         break
